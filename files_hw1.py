@@ -7,13 +7,12 @@ with open(file_path, 'r', encoding='UTF-8') as f:
     while True:
         # Чтение названия блюда
         dish_name = f.readline().strip()
-        print(dish_name)
+
         if not dish_name:
             break
 
         # Чтение количества ингредиентов
         ingredient_count = int(f.readline().strip())   
-        print(ingredient_count)
 
         # Чтение самих ингредиентов
         ingredients = []
