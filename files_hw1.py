@@ -1,4 +1,5 @@
 import os
+import pprint
 
 file_path = os.path.join(os.getcwd(), 'recipes.txt')
 cook_book = {}
@@ -32,6 +33,7 @@ with open(file_path, 'r', encoding='UTF-8') as f:
         f.readline()
 
  
-print(cook_book)
+pprint.pprint(cook_book)
+
         
         
