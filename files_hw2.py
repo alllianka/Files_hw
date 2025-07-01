@@ -34,16 +34,25 @@ with open(file_path, 'r', encoding='UTF-8') as f:
         f.readline()
 
 def get_shop_list_by_dishes(dishes, person_count):
-    recipes = {}
+    shop_list = {}
+    
     for dish in dishes:
-        for dish_name in cook_book:
-            if dish == dish_name:
-                for recipe in cook_book[dish_name]:
-                    # print(recipe)
-                    recipe['quantity'] *= person_count
-                    recipes.setdefault(recipe['ingredient'], \
-                        {'measure': recipe['unit'], 'quantity': recipe['quantity']})         
-    return pprint.pprint(recipes)
+        if dish not in cook_book:
+            print(f"Блюдо '{dish}' не найдено в книге рецептов.")
+            continue
+        
+        for ingredient in cook_book[dish]:
+            ingredient_name = ingredient['ingredient']
+            measure = ingredient['unit']
+            quantity = ingredient['quantity'] * person_count
+            
+            # Если ингредиент уже есть в списке, суммируем количество
+            if ingredient_name in shop_list:
+                shop_list[ingredient_name]['quantity'] += quantity
+            else:
+                shop_list[ingredient_name] = {'measure': measure, 'quantity': quantity}
+    
+    return print(shop_list)
 
 get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)      
             
